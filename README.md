@@ -45,3 +45,21 @@ Lifter een een socialer platform, wat lifters meer zal aanspreken. Bij liften ga
 - Ik heb nog nooit gewerkt met verschillende users, het onderscheid maken tussen verschillende interfaces voor lifters en automobilisten kan lastig worden
 - De korte tijd waarin deze app wordt gemaakt kan ervoor zorgen dat niet alle features de uiteindelijke versie halen.
 
+## Sketches for proposal
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen1.jpg" width="400" height="200" />
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen2.jpg" width="400" height="200" /> 
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen3.jpg" width="400" height="200" /> 
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen4.jpg" width="400" height="200" /> 
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen5.jpg" width="400" height="200" /> 
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen6.jpg" width="400" height="200" /> 
+
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen7.jpg" width="400" height="200" /> 
+
+
+
