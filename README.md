@@ -13,11 +13,12 @@ vooroordelen zorgen ervoor dat mensen minder snel gaan liften. Dit is zonde. Lif
 Lifter is een platform wat lifters en automobilisten verbind.
 
 ### *features*
-- Elke gebruiker heeft een eigen profiel, inclusief een rating van andere gebruikers
 - Een kaart waarop liftplekken in Nederland zijn aangegeven 
-- Gebruikers kunnen elkaar via de app berichten sturen 
+- Elke gebruiker heeft een eigen profiel 
+- Gebruikers kunnen elkaar een rating geven op basis van een reis die ze met elkaar hebben gemaakt
+- Gebruikers kunnen in de app met elkaar communiceren
 - Lifters kunnen zich aanmelden bij liftplekken 
-- Automobilisten kunnen zich aanmelden bij liftplekken, zij krijgen dan een melding als een lifter zich aanmeld bij deze plek (notification api android)
+- Automobilisten kunnen zich aanmelden bij liftplekken, zij krijgen dan een melding als een lifter zich aanmeld bij deze plek 
 
 ## Prerequisites
 
@@ -47,19 +48,19 @@ Lifter een een socialer platform, wat lifters meer zal aanspreken. Bij liften ga
 
 ## Sketches for proposal
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen1.jpg" width="400" height="200" />
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen1.jpg" width="600" height="300" />
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen2.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen2.jpg" width="600" height="300" /> 
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen3.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen3.jpg" width="600" height="300" /> 
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen4.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen4.jpg" width="600" height="300" /> 
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen5.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen5.jpg" width="600" height="300" /> 
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen6.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen6.jpg" width="600" height="300" /> 
 
-<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen7.jpg" width="400" height="200" /> 
+<img src="https://github.com/dutchfarao/lifter/blob/master/doc/screen7.jpg" width="600" height="300" /> 
 
 
 
