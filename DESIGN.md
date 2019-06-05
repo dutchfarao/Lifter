@@ -1,12 +1,8 @@
-# Design Document
 
 ## Advanced sketches UI
 
 <img src="https://github.com/dutchfarao/lifter/blob/master/doc/DesignDocument.png" width="900" height="450" />
 
-## Classes
-
-komt eraan
 
 ### *API's*
 - Maps SDK for android (https://developers.google.com/maps/documentation/android-sdk/map)
@@ -16,6 +12,40 @@ komt eraan
 ### *Data source*
 - Liftplekken in nederland (http://www.franknature.nl/hitchhike/hitchhike.htm)
 
+
 ### *Database*
 - SQLite
+
+### *Classes*
+
+| User                  |
+|--------------------------|
+| Rating: Float   |
+| Name: String         |
+| City: String             |
+| Age: Int             |
+| Car: String         |
+| Bio: String              |
+| Image: Bitmap            |
+| ________________________ |
+| Addtodatabase()  |
+| Getters()                |
+| Setters()                |
+
+
+
+| Liftspot         |
+|--------------------------|
+| Name: String   |
+| Image: Bitmap            |
+| Rating: Float   |
+| Drivers: Arraylist<>   |
+| Lifters: Arraylist<>   |
+| ________________________ |
+| Setrating()              |
+| AddDriver()              |
+| RemoveDriver()          |
+| AddLifter()              |
+| RemoveLifter()          |
+
 
