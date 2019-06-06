@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private class onClick2 implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(LoginActivity.this, RegisterActviity.class);
+            Intent intent = new Intent(LoginActivity.this, RegisterActvity.class);
             startActivity(intent);
         }
     }

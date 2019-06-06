@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyProfileActivity">
+
+    <ImageView
+        android:id="@+id/MyProfileImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+    <EditText
+        android:id="@+id/MyProfileName"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="15dp"
+        android:hint="Voornaam"
+        android:text="Hans"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileLeeftijd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <EditText
+        android:id="@+id/MyProfileCar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="17dp"
+        android:hint="Type Auto"
+        android:text="Ferrari"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileBio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileWoonplaats" />
+
+    <EditText
+        android:id="@+id/MyProfileWoonplaats"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="21dp"
+        android:hint="Woonplaats"
+        android:text="Amsterdam"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileCar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileLeeftijd" />
+
+    <EditText
+        android:id="@+id/MyProfileLeeftijd"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Leeftijd"
+        android:text="20"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileWoonplaats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileName" />
+
+    <EditText
+        android:id="@+id/MyProfileBio"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="23dp"
+        android:hint="Vertel iets over jezelf!"
+        android:text="Ik ben hans en ik heb een ferrari"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileUpdateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileCar" />
+
+    <Button
+        android:id="@+id/MyProfileUpdateButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileBio" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="19dp"
+        android:numStars="5"
+        android:rating="3"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileName"
+        app:layout_constraintStart_toStartOf="@+id/MyProfileName"
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileImage" />
+</android.support.constraint.ConstraintLayout>

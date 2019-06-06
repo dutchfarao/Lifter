@@ -1,13 +1,17 @@
 package com.example.lifter;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -22,6 +26,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //create listener for floating action button
+        FloatingActionButton btn = findViewById(R.id.MapsFloatingActionButton);
+        onClick onButtonClick = new onClick();
+        btn.setOnClickListener(onButtonClick);
+
     }
 
 
@@ -39,8 +49,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng position = new LatLng(-34, 151);
+        //setTag(position) while adding marker to map.
+        Marker marker = mMap.addMarker(new MarkerOptions().position(position).title("Marker in Sydney"));
+        marker.setTag(position);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+
+        //set listener for marker
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent = new Intent(MapsActivity.this, LiftActivity.class);
+                startActivity(intent);
+                //int position = (int)(marker.getTag());
+                //Using position get Value from arraylist
+                return true;
+            }
+        });
     }
+
+    //creation of onclick for floating action button
+    private class onClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
+            startActivity(intent);
+        }
+    }
+
+
 }
