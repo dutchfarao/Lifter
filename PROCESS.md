@@ -14,7 +14,9 @@ Ook heb ik 2 classes uitgewerkt die noodazakelijk zijn voor defunctionaliteit va
 
 Ik ben vandaag met felix gaan zitten voor een eerste stand-up, ik heb hem verscheidene tips kunnen geven voor zijn kleding app. Ook hebben we gesproken over Lifter, hier kwamen
 de volgende suggesties uit:
-
+- Zoek uit of de sqplite database van cs50 bruikbaar is voor dit project 
+- Voor het testen van de notificaties is het noodzakelijk dat er twee accounts tegelijk aangemeld zijn
+- De chatroom gaat misschien teveel werk kosten (dit zie ik overigens zelf ook in)
 
 
 Daarna ben ik begonnen met het bouwen van het framework van de app, ik heb nu 2 van de 7 schermen gedaan.
