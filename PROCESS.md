@@ -19,9 +19,8 @@ de volgende suggesties uit:
 - De chatroom gaat misschien teveel werk kosten (dit zie ik overigens zelf ook in)
 
 
-Daarna ben ik begonnen met het bouwen van het framework van de app, ik heb nu 2 van de 7 schermen gedaan.
+Daarna ben ik begonnen met het bouwen van het framework van de app, ik heb nu 2 schermen gedaan. De google maps api werkt al
 
 ## Donderdag 6 juni
 
-Vandaag ben ik verder gegaan met het uitwerken van de activities. Dit gaat soepel. De Google Maps API werkt al, het is nu slechts een kwestie van alle schermen aan elkaar 
-te verbinden.
+Vandaag ben ik verder gegaan met het uitwerken van de activities. Dit gaat soepel. Alle schermen die ik in eerste instantie wil gaan implementeren zijn er, navigatie tussen deze schermen werkt goed. Ten opzichte van het oorspronkelijke design heb ik voor nu de chat achterwege gelaten. Ook maak ik nog geen onderscheid tussen 'MyProfileActivity' en 'OtherProfileActivity', er is nu gewoon 1 profile activity. Ik ga tijdens de volgende stand-up feedback vragen wat het handigst hiervoor is. 
