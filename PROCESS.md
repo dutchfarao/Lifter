@@ -24,3 +24,11 @@ Daarna ben ik begonnen met het bouwen van het framework van de app, ik heb nu 2 
 ## Donderdag 6 juni
 
 Vandaag ben ik verder gegaan met het uitwerken van de activities. Dit gaat soepel. Alle schermen die ik in eerste instantie wil gaan implementeren zijn er, navigatie tussen deze schermen werkt goed. Ten opzichte van het oorspronkelijke design heb ik voor nu de chat achterwege gelaten. Ook maak ik nog geen onderscheid tussen 'MyProfileActivity' en 'OtherProfileActivity', er is nu gewoon 1 profile activity. Ik ga tijdens de volgende stand-up feedback vragen wat het handigst hiervoor is. 
+
+
+# Vrijdag 7 juni
+
+Ik ben vandaag met felix en bart gaan zitten voor stand-up. Vooral bart kon ik goed helpen omdat hij aan het strugglen was met een maps api, ik heb hem aangeraden om ook voor de Google Maps API te kiezen en heb hem uitgelegd hoe dit werkt. Ook kwamen er suggesties voor mijn app:
+- Het is misschien een idee om mensen zelf een liftplek te laten toevoegen, ik ben hier zelf echter wel sceptisch over omdat mensen dan
+alles als liftplek kunnen aangeven, dit doet af aan de betrouwbaarheid van de app. verder moet je dan alle liftplekken gaan opslaan in een database en bij opstarten al deze deze requesten, dit zal de snelheid van de app niet ten goede komen. Ik denk dan ook dat ik dit niet ga toevoegen.
+- Ik ga de structuur van de app licht aanpassem. ipv een MyProfileActivity en OtherProfileActivity komt er een ProfileActivity en een EditProfileActivity, deze laatste kun je alleen bereiken als je in je naar je eigen profielpagina kijkt.
