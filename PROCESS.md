@@ -32,3 +32,11 @@ Ik ben vandaag met felix en bart gaan zitten voor stand-up. Vooral bart kon ik g
 - Het is misschien een idee om mensen zelf een liftplek te laten toevoegen, ik ben hier zelf echter wel sceptisch over omdat mensen dan
 alles als liftplek kunnen aangeven, dit doet af aan de betrouwbaarheid van de app. verder moet je dan alle liftplekken gaan opslaan in een database en bij opstarten al deze deze requesten, dit zal de snelheid van de app niet ten goede komen. Ik denk dan ook dat ik dit niet ga toevoegen.
 - Ik ga de structuur van de app licht aanpassem. ipv een MyProfileActivity en OtherProfileActivity komt er een ProfileActivity en een EditProfileActivity, deze laatste kun je alleen bereiken als je in je naar je eigen profielpagina kijkt.
+
+# Dinsdag 11 juni
+
+Na een lang pinksterweekend pakken we de draad weer op. Tijdens de standup geven we elkaar een korte update, niemand heeft echter heel veel vooruitgang gemaakt. Ik zelf vertel dat ik de structuur van de app zoals hierboven staat iets ga aanpassen en dat ik bij de MapActivity een preview wil als mensen op een locatie klikken ipv dat ze er meteen heen gaan.
+
+
+
+
