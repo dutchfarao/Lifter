@@ -37,6 +37,9 @@ alles als liftplek kunnen aangeven, dit doet af aan de betrouwbaarheid van de ap
 
 Na een lang pinksterweekend pakken we de draad weer op. Tijdens de standup geven we elkaar een korte update, niemand heeft echter heel veel vooruitgang gemaakt. Ik zelf vertel dat ik de structuur van de app zoals hierboven staat iets ga aanpassen en dat ik bij de MapActivity een preview wil als mensen op een locatie klikken ipv dat ze er meteen heen gaan.
 
+# Woensdag 12 juni
+
+Vandaag stond in het teken van het laden van de CSV file en het automatisch plaatsen van markers op de kaart. Dit is uiteindelijk gelukt, na veel gezeik. Bij het laden van de csv file stuitte ik steeds op een ander problee, ik had de csv namelijk handgeschreven en dat leidde tot fouten bij het laden. De jongens in de groep hadden hier niet per se goede suggesties voor (ook niet achteraf). Gelukkig werkt nu wel alles in orde. De rest van de week staat in het teken van het doorgeven van het liftplek object naar de LiftActivity na het klikken van de marker. Daarna moet ik gaan kijken naar de database voor het handelen van de users. Het wordt misschien lastig om voor vrijdag de alpha versie af te hebben.
 
 
 
