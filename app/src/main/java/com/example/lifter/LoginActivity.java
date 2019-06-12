@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -31,6 +35,15 @@ public class LoginActivity extends AppCompatActivity {
     private class onClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            //read the liftspots from csv file using csv helper
+            InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
+            CSVHelper csvFile = new CSVHelper(inputStream);
+            List<Liftspot> liftspots = csvFile.read();
+            for(Liftspot liftspot : liftspots) {
+                System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
+            }
+
+
             Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
             startActivity(intent);
         }

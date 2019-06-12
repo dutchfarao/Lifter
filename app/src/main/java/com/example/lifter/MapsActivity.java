@@ -14,6 +14,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.InputStream;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -48,19 +51,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in almelo
-        LatLng position = new LatLng(52.34034900956803, 6.657414436340332);
-        //setTag(position) while adding marker to map.
-        Marker marker = mMap.addMarker(new MarkerOptions().position(position).title("N35 (Henriëtte Roland Holstlaan) x Weezebeeksingel\n"));
-        marker.setTag(position);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        //read the liftspots from csv file using csv helper
+        InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
+        CSVHelper csvFile = new CSVHelper(inputStream);
+        List<Liftspot> liftspots = csvFile.read();
+        for(Liftspot liftspot : liftspots) {
+            System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
+            LatLng position = new LatLng(liftspot.getLat(), liftspot.getLon());
+            Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(liftspot.getName()));
+            marker.setTag(position);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        }
 
-        // Add a marker in Sydney and move the camera
-        LatLng position1 = new LatLng(52.32897791133947, 6.650199294090271);
-        //setTag(position) while adding marker to map.
-        Marker marker1 = mMap.addMarker(new MarkerOptions().position(position1).title("N35 (Henriëtte Roland Holstlaan)\n"));
-        marker1.setTag(position1);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(position1));
+//        // Add a marker in almelo
+//        LatLng position = new LatLng(52.34034900956803, 6.657414436340332);
+//        //setTag(position) while adding marker to map.
+//        Marker marker = mMap.addMarker(new MarkerOptions().position(position).title("N35 (Henriëtte Roland Holstlaan) x Weezebeeksingel\n"));
+//        marker.setTag(position);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng position1 = new LatLng(52.32897791133947, 6.650199294090271);
+//        //setTag(position) while adding marker to map.
+//        Marker marker1 = mMap.addMarker(new MarkerOptions().position(position1).title("N35 (Henriëtte Roland Holstlaan)\n"));
+//        marker1.setTag(position1);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(position1));
 
         //set listener for marker
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
