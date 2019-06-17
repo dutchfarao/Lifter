@@ -13,8 +13,10 @@ import android.widget.Toolbar;
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,9 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     StreetViewPanorama streetView;
     Liftspot liftspotObject;
     private static final String STREETVIEW_BUNDLE = "StreetViewBundle";
-    private StreetViewPanoramaView g_map_street;
+    StreetViewPanoramaFragment g_map_street;
+    float lat;
+    float lon;
 
 
     @Override
@@ -32,14 +36,11 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lift);
 
-        //code based on https://www.zoftino.com/android-google-map-street-view-example
-        StreetViewPanoramaFragment streetViewFragment =
+        //based on https://developers.google.com/maps/documentation/android-sdk/streetview
+        g_map_street =
                 (StreetViewPanoramaFragment) getFragmentManager()
                         .findFragmentById(R.id.g_map_street);
-        streetViewFragment.getStreetViewPanoramaAsync(this);
-        streetView.setPosition(new LatLng(liftspotObject.getLat(), liftspotObject.getLon()));
-        streetView.setStreetNamesEnabled(true);
-
+        g_map_street.getStreetViewPanoramaAsync(this);
 
         //get intent
         Intent intent = getIntent();
@@ -48,6 +49,26 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         String liftspotstring = args.getString("markerId");
         int liftspotId = Integer.valueOf(liftspotstring);
         liftspotObject = liftspots.get(liftspotId);
+
+        //code based on https://www.zoftino.com/android-google-map-street-view-example
+
+//        StreetViewPanoramaOptions streetViewPanoramaOptions = new StreetViewPanoramaOptions();
+//        streetViewPanoramaOptions.panningGesturesEnabled(false);
+//        lat = liftspotObject.getLat();
+//        lon = liftspotObject.getLon();
+//
+//        streetViewPanoramaOptions.position(new LatLng(lat, lon));
+//        streetViewPanoramaOptions.userNavigationEnabled(false);
+//        streetViewPanoramaOptions.zoomGesturesEnabled(true);
+//
+//        StreetViewPanoramaCamera streetViewPanoramaCamera = new StreetViewPanoramaCamera(25, 30, 1);
+//        streetViewPanoramaOptions.panoramaCamera(streetViewPanoramaCamera);
+//
+//        Bundle mStreetViewBundle = null;
+//        if (savedInstanceState != null) {
+//            mStreetViewBundle = savedInstanceState.getBundle(STREETVIEW_BUNDLE);
+//        }
+//        g_map_street.onCreate(mStreetViewBundle);
 
 
         //set textviews and rating
@@ -80,9 +101,42 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
 
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
-        streetView = streetViewPanorama;
+        lat = liftspotObject.getLat();
+        lon = liftspotObject.getLon();
+        streetViewPanorama.setPosition(new LatLng(lat,lon));
 
+        //streetView = streetViewPanorama;
+    }
 
+    @Override
+    protected void onResume() {
+        g_map_street.onResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        g_map_street.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        g_map_street.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mStreetViewBundle = outState.getBundle(STREETVIEW_BUNDLE);
+        if (mStreetViewBundle == null) {
+            mStreetViewBundle = new Bundle();
+            outState.putBundle(STREETVIEW_BUNDLE, mStreetViewBundle);
+        }
+
+        g_map_street.onSaveInstanceState(mStreetViewBundle);
     }
 
 
