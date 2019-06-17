@@ -45,6 +45,10 @@ Vandaag stond in het teken van het laden van de CSV file en het automatisch plaa
 
 Ik heb dit weekend in eerste instantie geprobeerd om de database goed werkend te krijgen. Dit is mij tot op heden vervelend genoeg niet gelukt. Toen heb ik besloten om dan maar eerst de mapsactivity naar liftactivity perfect te krijgen. Als men nu op een marker klikt gaat de user ook daadwerkelijk naar de LiftActivity van de liftspot in kwestie, dit is positief. Als foto bij de liftspot wil ik een google streetview foto van die locatie. De API die ik hiervoor gebruik is van google zelf, en is betaald. Ik heb mijn credit card gekoppeld aan m'n google account om dit werkend te krijgen maar krijg tot op heden alleen nog maar een zwart plaatje ipv de daadwerkelijke streetview.
 
+# Maandag 17 juni
+
+Vandaag is het eindelijk gelukt de streetview api werkend te krijgen! ik kan mij nu volledig gaan richten op het inloggen en registreren. Door brand op sciencepark vandaag geen standup meeting geweest.
+
 
 
 
