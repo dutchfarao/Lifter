@@ -6,29 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActviity">
 
-    <TextView
-        android:id="@+id/RegisterImagetext"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginTop="51dp"
-        android:text="Kies een foto"
-        app:layout_constraintBottom_toTopOf="@+id/MapsFloatingActionButton"
+    <EditText
+        android:id="@+id/RegisterUsername"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="117dp"
+        android:hint="Gebruikersnaam"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/MapsFloatingActionButton"
-        android:layout_width="173dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginBottom="28dp"
+    <EditText
+        android:id="@+id/RegisterPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="25dp"
+        android:hint="Wachtwoord"
         app:layout_constraintBottom_toTopOf="@+id/RegisterNaam"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterUsername" />
 
     <EditText
         android:id="@+id/RegisterNaam"

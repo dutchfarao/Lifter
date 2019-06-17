@@ -14,8 +14,8 @@ public class CSVHelper {
         this.inputStream = inputStream;
     }
 
-    public List read(){
-        List<Liftspot> liftspots = new ArrayList<Liftspot>();
+    public ArrayList<Liftspot> read(){
+        ArrayList<Liftspot> liftspots = new ArrayList<>();
         int idCounter = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try {

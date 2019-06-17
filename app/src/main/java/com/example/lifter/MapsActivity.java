@@ -15,6 +15,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.InputStream;
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -29,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
         //create listener for floating action button
         FloatingActionButton btn = findViewById(R.id.MapsFloatingActionButton);
@@ -54,11 +58,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //read the liftspots from csv file using csv helper
         InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
         CSVHelper csvFile = new CSVHelper(inputStream);
-        List<Liftspot> liftspots = csvFile.read();
+        final ArrayList<Liftspot> liftspots;
+        liftspots = csvFile.read();
         for(Liftspot liftspot : liftspots) {
             System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
             LatLng position = new LatLng(liftspot.getLat(), liftspot.getLon());
-            Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(liftspot.getName()));
+            Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(String.valueOf(liftspot.getId())));
             marker.setTag(position);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         }
@@ -82,6 +87,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, LiftActivity.class);
+                Bundle args = new Bundle();
+                args.putSerializable("liftspots", liftspots);
+                args.putString("markerId", marker.getTitle());
+                intent.putExtra("BUNDLE",args);
                 startActivity(intent);
                 //int position = (int)(marker.getTag());
                 //Using position get Value from arraylist
