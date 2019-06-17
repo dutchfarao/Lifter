@@ -41,5 +41,11 @@ Na een lang pinksterweekend pakken we de draad weer op. Tijdens de standup geven
 
 Vandaag stond in het teken van het laden van de CSV file en het automatisch plaatsen van markers op de kaart. Dit is uiteindelijk gelukt, na veel gezeik. Bij het laden van de csv file stuitte ik steeds op een ander problee, ik had de csv namelijk handgeschreven en dat leidde tot fouten bij het laden. De jongens in de groep hadden hier niet per se goede suggesties voor (ook niet achteraf). Gelukkig werkt nu wel alles in orde. De rest van de week staat in het teken van het doorgeven van het liftplek object naar de LiftActivity na het klikken van de marker. Daarna moet ik gaan kijken naar de database voor het handelen van de users. Het wordt misschien lastig om voor vrijdag de alpha versie af te hebben.
 
+# Vrijdag 14 juni - Zondag 16 juni
+
+Ik heb dit weekend in eerste instantie geprobeerd om de database goed werkend te krijgen. Dit is mij tot op heden vervelend genoeg niet gelukt. Toen heb ik besloten om dan maar eerst de mapsactivity naar liftactivity perfect te krijgen. Als men nu op een marker klikt gaat de user ook daadwerkelijk naar de LiftActivity van de liftspot in kwestie, dit is positief. Als foto bij de liftspot wil ik een google streetview foto van die locatie. De API die ik hiervoor gebruik is van google zelf, en is betaald. Ik heb mijn credit card gekoppeld aan m'n google account om dit werkend te krijgen maar krijg tot op heden alleen nog maar een zwart plaatje ipv de daadwerkelijke streetview.
+
+
+
 
 
