@@ -49,6 +49,10 @@ Ik heb dit weekend in eerste instantie geprobeerd om de database goed werkend te
 
 Vandaag is het eindelijk gelukt de streetview api werkend te krijgen! ik kan mij nu volledig gaan richten op het inloggen en registreren. Door brand op sciencepark vandaag geen standup meeting geweest.
 
+# Dinsdag 18 juni
+
+Het lukt me maar niet om een user te posten, lang kwam ik er niet achter waarom dit was. Uiteindelijk kwam ik erachter dat ik de oorspronkelijke structuur van de database had veranderd, waardoor de post mehtod die geschreven is in rester.py niet meer afgestemd was op de structuur. Hier ben ik achter gekomen door aan Felix te vragen om in te loggen bij zijn cs50 ide, ik kon zo de oorspronkelijke sturtcuur van de database bekijken. Voor morgen ben ik van plan om rester.py te herschrijven naar mijn data. Dan hoop ik morgen in ieder geval nieuwe gebruikers te kunnen toevoegen.
+
 
 
 
