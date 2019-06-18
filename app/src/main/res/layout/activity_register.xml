@@ -97,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:layout_marginBottom="67dp"
+        android:onClick="submit"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

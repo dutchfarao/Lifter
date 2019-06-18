@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class RegisterActvity extends AppCompatActivity {
+import com.android.volley.VolleyError;
+
+public class RegisterActvity extends AppCompatActivity implements UserUploader.Callback {
 
     EditText name;
     EditText username;
@@ -25,6 +28,27 @@ public class RegisterActvity extends AppCompatActivity {
     String inputbio;
     String inputusername;
     String inputpassword;
+
+
+    // Shows the user a warning if an error is encountered during the uploading of the score
+    @Override
+    public void postedUserError(VolleyError error) {
+        Toast.makeText(this, "Something went wrong ..", Toast.LENGTH_LONG).show();
+    }
+
+    // Shows the user a toast if the score is successfully uploaded to the database
+    @Override
+    public void postedUser(String response) {
+        Toast.makeText(this, "Account had been created!", Toast.LENGTH_LONG).show();
+
+        // Directs user to the next activity using Intent
+        Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,37 +67,29 @@ public class RegisterActvity extends AppCompatActivity {
 
 
 
-        //create listener for login button
-        Button btn = findViewById(R.id.RegisterButton);
-        onClick onButtonClick = new onClick();
-        btn.setOnClickListener(onButtonClick);
+
+
     }
 
-    //creation of onclick for button
-    private class onClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
 
 
-            //get values
-            Context context = v.getContext();
+    public void submit(View v) {
 
-            inputname = String.valueOf(name.getText());
-            inputagestring = String.valueOf(age.getText());
-            inputage = Integer.valueOf(inputagestring);
-            inputcity = String.valueOf(city.getText());
-            inputcar = String.valueOf(car.getText());
-            inputbio = String.valueOf(bio.getText());
-            inputusername = String.valueOf(username.getText());
-            inputpassword = String.valueOf(password.getText());
+//        inputname = String.valueOf(name.getText());
+//            inputagestring = String.valueOf(age.getText());
+//            inputage = Integer.valueOf(inputagestring);
+//            inputcity = String.valueOf(city.getText());
+//            inputcar = String.valueOf(car.getText());
+//            inputbio = String.valueOf(bio.getText());
+         inputusername = String.valueOf(username.getText());
+         inputpassword = String.valueOf(password.getText());
 
-            LoginRequest register = new LoginRequest(context, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
-            register.sendUser(inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
+        UserUploader register = new UserUploader(this, inputusername, inputpassword);
+        register.sendUser(this);
 
 
 
-            Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
-            startActivity(intent);
-        }
+
     }
+
 }
