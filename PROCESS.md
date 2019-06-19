@@ -51,9 +51,11 @@ Vandaag is het eindelijk gelukt de streetview api werkend te krijgen! ik kan mij
 
 # Dinsdag 18 juni
 
-Het lukt me maar niet om een user te posten, lang kwam ik er niet achter waarom dit was. Uiteindelijk kwam ik erachter dat ik de oorspronkelijke structuur van de database had veranderd, waardoor de post mehtod die geschreven is in rester.py niet meer afgestemd was op de structuur. Hier ben ik achter gekomen door aan Felix te vragen om in te loggen bij zijn cs50 ide, ik kon zo de oorspronkelijke sturtcuur van de database bekijken. Voor morgen ben ik van plan om rester.py te herschrijven naar mijn data. Dan hoop ik morgen in ieder geval nieuwe gebruikers te kunnen toevoegen.
+Het lukt me maar niet om een user te posten, lang kwam ik er niet achter waarom dit was. Uiteindelijk kwam ik erachter dat ik de oorspronkelijke structuur van de database had veranderd, waardoor de post method die geschreven is in rester.py niet meer afgestemd was op de structuur. Hier ben ik achter gekomen door aan Felix te vragen om in te loggen bij zijn cs50 ide, ik kon zo de oorspronkelijke structuur van de database bekijken. Voor morgen ben ik van plan om rester.py te herschrijven naar mijn data. Dan hoop ik morgen in ieder geval nieuwe gebruikers te kunnen toevoegen.
 
+# Woensdag 19 juni
 
+Vandaag een goede standup gehad. Ik heb bart kunnen helpen met zijn database problemen, en hij heeft mij geholpen met het login process. De Rester database is verre van ideaal voor het handlen van mijn data maar het is mij toch gelukt. Gebruikers kunnen nu inloggen, registreren en hun eigen account bekijken. Morgen ga ik ervoor zorgen dat ze hun account ook kunnen aanpassen (nieuwe username/wachtwoord) en ga ik ervoor zorgen dat drivers en lifters zich kunnen aanmelden bij een liftplek. De app is dan in principe af. Dan is het een kwestie van puntjes op de i zetten.
 
 
 
