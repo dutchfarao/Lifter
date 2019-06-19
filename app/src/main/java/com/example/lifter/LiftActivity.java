@@ -24,6 +24,7 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     TextView LiftTitle;
     RatingBar LiftRating;
     StreetViewPanorama streetView;
+    User userObject;
     Liftspot liftspotObject;
     private static final String STREETVIEW_BUNDLE = "StreetViewBundle";
     StreetViewPanoramaFragment g_map_street;
@@ -48,27 +49,8 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         ArrayList<Liftspot> liftspots = (ArrayList<Liftspot>) args.getSerializable("liftspots");
         String liftspotstring = args.getString("markerId");
         int liftspotId = Integer.valueOf(liftspotstring);
+        userObject = (User)args.getSerializable("userObject");
         liftspotObject = liftspots.get(liftspotId);
-
-        //code based on https://www.zoftino.com/android-google-map-street-view-example
-
-//        StreetViewPanoramaOptions streetViewPanoramaOptions = new StreetViewPanoramaOptions();
-//        streetViewPanoramaOptions.panningGesturesEnabled(false);
-//        lat = liftspotObject.getLat();
-//        lon = liftspotObject.getLon();
-//
-//        streetViewPanoramaOptions.position(new LatLng(lat, lon));
-//        streetViewPanoramaOptions.userNavigationEnabled(false);
-//        streetViewPanoramaOptions.zoomGesturesEnabled(true);
-//
-//        StreetViewPanoramaCamera streetViewPanoramaCamera = new StreetViewPanoramaCamera(25, 30, 1);
-//        streetViewPanoramaOptions.panoramaCamera(streetViewPanoramaCamera);
-//
-//        Bundle mStreetViewBundle = null;
-//        if (savedInstanceState != null) {
-//            mStreetViewBundle = savedInstanceState.getBundle(STREETVIEW_BUNDLE);
-//        }
-//        g_map_street.onCreate(mStreetViewBundle);
 
 
         //set textviews and rating
@@ -145,6 +127,7 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(LiftActivity.this, MapsActivity.class);
+            intent.putExtra("userObject", userObject);
             startActivity(intent);
         }
     }

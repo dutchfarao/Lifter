@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:srcCompat="@tools:sample/avatars[0]" />
 
     <EditText
-        android:id="@+id/MyProfileName"
+        android:id="@+id/MyProfileUsername"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="55dp"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="15dp"
         android:hint="Voornaam"
         android:text="Hans"
-        app:layout_constraintBottom_toTopOf="@+id/MyProfileLeeftijd"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfilePassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
@@ -59,21 +59,21 @@
         app:layout_constraintBottom_toTopOf="@+id/MyProfileCar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MyProfileLeeftijd" />
+        app:layout_constraintTop_toBottomOf="@+id/MyProfilePassword" />
 
     <EditText
-        android:id="@+id/MyProfileLeeftijd"
+        android:id="@+id/MyProfilePassword"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="55dp"
         android:layout_marginEnd="55dp"
         android:layout_marginBottom="20dp"
-        android:hint="Leeftijd"
-        android:text="20"
+        android:hint="Wachwtoord"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/MyProfileWoonplaats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MyProfileName" />
+        app:layout_constraintTop_toBottomOf="@+id/MyProfileUsername" />
 
     <EditText
         android:id="@+id/MyProfileBio"
@@ -109,7 +109,7 @@
         android:layout_marginBottom="19dp"
         android:numStars="5"
         android:rating="3"
-        app:layout_constraintBottom_toTopOf="@+id/MyProfileName"
-        app:layout_constraintStart_toStartOf="@+id/MyProfileName"
+        app:layout_constraintBottom_toTopOf="@+id/MyProfileUsername"
+        app:layout_constraintStart_toStartOf="@+id/MyProfileUsername"
         app:layout_constraintTop_toBottomOf="@+id/MyProfileImage" />
 </android.support.constraint.ConstraintLayout>

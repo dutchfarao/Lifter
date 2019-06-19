@@ -23,11 +23,15 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    User userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Intent intent = getIntent();
+        userProfile = (User)intent.getSerializableExtra("userObject");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -68,20 +72,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         }
 
-//        // Add a marker in almelo
-//        LatLng position = new LatLng(52.34034900956803, 6.657414436340332);
-//        //setTag(position) while adding marker to map.
-//        Marker marker = mMap.addMarker(new MarkerOptions().position(position).title("N35 (Henriëtte Roland Holstlaan) x Weezebeeksingel\n"));
-//        marker.setTag(position);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng position1 = new LatLng(52.32897791133947, 6.650199294090271);
-//        //setTag(position) while adding marker to map.
-//        Marker marker1 = mMap.addMarker(new MarkerOptions().position(position1).title("N35 (Henriëtte Roland Holstlaan)\n"));
-//        marker1.setTag(position1);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(position1));
-
         //set listener for marker
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -90,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Bundle args = new Bundle();
                 args.putSerializable("liftspots", liftspots);
                 args.putString("markerId", marker.getTitle());
+                args.putSerializable("userObject", userProfile);
                 intent.putExtra("BUNDLE",args);
                 startActivity(intent);
                 //int position = (int)(marker.getTag());
@@ -104,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
+            intent.putExtra("userObject", userProfile);
             startActivity(intent);
         }
     }

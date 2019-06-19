@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/RegisterNaam"
+        android:id="@+id/LoginUsername"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="49dp"
@@ -34,10 +34,10 @@
         android:layout_marginTop="20dp"
 
         android:hint="Wachtwoord"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
+        app:layout_constraintBottom_toTopOf="@+id/LoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterNaam" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginUsername" />
 
     <Button
         android:id="@+id/LoginButton"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:onClick="1"
+        android:onClick="login"
         android:text="Login"
         app:layout_constraintBottom_toTopOf="@+id/LoginRegisterLinkButton"
         app:layout_constraintEnd_toEndOf="parent"
