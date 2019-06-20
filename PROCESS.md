@@ -57,5 +57,9 @@ Het lukt me maar niet om een user te posten, lang kwam ik er niet achter waarom 
 
 Vandaag een goede standup gehad. Ik heb bart kunnen helpen met zijn database problemen, en hij heeft mij geholpen met het login process. De Rester database is verre van ideaal voor het handlen van mijn data maar het is mij toch gelukt. Gebruikers kunnen nu inloggen, registreren en hun eigen account bekijken. Morgen ga ik ervoor zorgen dat ze hun account ook kunnen aanpassen (nieuwe username/wachtwoord) en ga ik ervoor zorgen dat drivers en lifters zich kunnen aanmelden bij een liftplek. De app is dan in principe af. Dan is het een kwestie van puntjes op de i zetten.
 
+# Donderdag 20 juni
+
+Vandaag heb ik het updaten van een user afgerond. Een gebruiker kan zijn account nu aanpassen. Verder heb ik een gebruiker meer informatie meegegeven. Ipv alleen een username en password omvat een account nu veel meer informatie (denk aan leeftijd, woonplaats  een bio etc.) Tijdens de standup blijkt dat Felix problemen heeft met z'n sql database, omdat ik zelf met volley werk heb ik hier helaas weinig tips over. Morgen ga ik ervoor zorgen dat drivers en lifters zich kunnen aanmelden bij een liftplek.
+
 
 
