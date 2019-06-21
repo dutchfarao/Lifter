@@ -61,5 +61,43 @@ Vandaag een goede standup gehad. Ik heb bart kunnen helpen met zijn database pro
 
 Vandaag heb ik het updaten van een user afgerond. Een gebruiker kan zijn account nu aanpassen. Verder heb ik een gebruiker meer informatie meegegeven. Ipv alleen een username en password omvat een account nu veel meer informatie (denk aan leeftijd, woonplaats  een bio etc.) Tijdens de standup blijkt dat Felix problemen heeft met z'n sql database, omdat ik zelf met volley werk heb ik hier helaas weinig tips over. Morgen ga ik ervoor zorgen dat drivers en lifters zich kunnen aanmelden bij een liftplek.
 
+# Vrijdag 21 juni
+
+Voor het aanmelden van drivers/lifters bij een liftplek is het noodzaak om de liftplekken ook naar rester te uploaden, je kan immers users niet lokaal aanmelden bij een liftplek. Mijn oplossing hiervoor is als volgt. Ik upload eenmalig alle liftplekken naar rester dmv LiftspotUploader, voor deze ene keer call ik die in de onCreate van DriverLiferActivity (die straks voor een ander doel wordt gebruikt), dat doe ik als volgt:
+
+```
+public class DriverLifterActivity extends AppCompatActivity implements LiftspotUploader.Callback {
+
+
+    @Override
+    public void postedLiftspotError(VolleyError error) {
+        Toast.makeText(this, "Something went wrong ..", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void postedLiftspot(String response) {
+        Toast.makeText(this, "Liftspots have been uploaded to database", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_driver_lifter);
+
+        //read the liftspots from csv file using csv helper
+        InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
+        CSVHelper csvFile = new CSVHelper(inputStream);
+        final ArrayList<Liftspot> liftspots;
+        liftspots = csvFile.read();
+        for(Liftspot liftspot : liftspots) {
+            LiftspotUploader upload = new LiftspotUploader(this, liftspot.getName(), liftspot.getRating(), liftspot.getType(), String.valueOf(liftspot.getLat()), String.valueOf(liftspot.getLon()), "", "");
+            upload.sendLiftspot(this);
+        }
+    }
+
+```
+De liftspots staan dus nu in de database, en bovenstaande code is weer verwijderd uit DriverLifterActivity. In deze activity ga ik nu de liftspots aanpassen dmv LiftspotUpdater. Met aanpassen bedoel ik specifiek het toevoegen en verwijderen van drivers/lifters voor een bepaalde liftspot. De liftspot bevatten allemaal een drivers en lifters string, deze string bestaat uit userId's van gebruikers die zich voor die locatie hebben aangemeld als driver. D.m.v een PUT request worden deze strings aangepast als een driver/lifter zich af- of aanmeld.
 
 
