@@ -8,13 +8,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LiftspotUpdater {
     Context context;
-    String id;
     String url;
     String name;
     String rating;
@@ -25,10 +28,9 @@ public class LiftspotUpdater {
     String lifters;
     RequestQueue queue;
 
-    public LiftspotUpdater(Context context, String url, String id, String name, String rating, String type, String lat, String lon, String drivers, String lifters) {
+    public LiftspotUpdater(Context context, String url, String name, String rating, String type, String lat, String lon, String drivers, String lifters) {
         this.context = context;
         this.url = url;
-        this.id = id;
         this.name = name;
         this.rating = rating;
         this.type = type;
@@ -43,6 +45,9 @@ public class LiftspotUpdater {
         void updatedLiftspotError(VolleyError error);
         void updatedLiftspot(String response);
     }
+
+
+
 
     // Sends your points to the server
     public void updateLiftspot(final LiftspotUpdater.Callback activity) {

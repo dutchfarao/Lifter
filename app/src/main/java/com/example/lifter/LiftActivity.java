@@ -124,7 +124,7 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     public void addDriver(View v) {
         Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
         intent.putExtra("userObject", userObject);
-        intent.putExtra("lifspotObject", liftspotObject);
+        intent.putExtra("liftspotObject", liftspotObject);
         intent.putExtra("category", "driver");
         startActivity(intent);
     }
@@ -132,7 +132,7 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     public void addLifter(View v) {
         Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
         intent.putExtra("userObject", userObject);
-        intent.putExtra("lifspotObject", liftspotObject);
+        intent.putExtra("liftspotObject", liftspotObject);
         intent.putExtra("category", "lifter");
         startActivity(intent);
     }

@@ -1,10 +1,4 @@
 package com.example.lifter;
-
-import android.graphics.Bitmap;
-
-import java.io.Serializable;
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,8 +10,8 @@ public class Liftspot implements Serializable {
     private String type;
     private float lat;
     private float lon;
-    private ArrayList drivers;
-    private ArrayList lifters;
+    public ArrayList<User> drivers;
+    public ArrayList<User> lifters;
 
     public String getName() {
         return name;
@@ -67,19 +61,19 @@ public class Liftspot implements Serializable {
         this.lon = lon;
     }
 
-    public ArrayList getDrivers() {
+    public ArrayList<User> getDrivers() {
         return drivers;
     }
 
-    public void setDrivers(ArrayList drivers) {
+    public void setDrivers(ArrayList<User> drivers) {
         this.drivers = drivers;
     }
 
-    public ArrayList getLifters() {
+    public ArrayList<User> getLifters() {
         return lifters;
     }
 
-    public void setLifters(ArrayList lifters) {
+    public void setLifters(ArrayList<User> lifters) {
         this.lifters = lifters;
     }
 }
