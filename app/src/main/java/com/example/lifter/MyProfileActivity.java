@@ -6,11 +6,54 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class MyProfileActivity extends AppCompatActivity {
+import com.android.volley.VolleyError;
+
+public class MyProfileActivity extends AppCompatActivity implements UserUpdater.Callback{
     User userProfile;
     EditText MyprofileUsername;
     EditText MyprofilePassword;
+    EditText MyprofileName;
+    EditText MyprofileCity;
+    EditText MyprofileAge;
+    EditText MyprofileCar;
+    EditText MyprofileBio;
+    String inputname;
+    String inputage;
+    String inputcity;
+    String inputcar;
+    String inputbio;
+    String inputusername;
+    String inputpassword;
+    String id;
+    String url;
+
+    // Shows the user a warning if an error is encountered during the uploading of the score
+    @Override
+    public void updatedUserError(VolleyError error) {
+        Toast.makeText(this, "Something went wrong ..", Toast.LENGTH_LONG).show();
+    }
+
+    // Shows the user a toast if the score is successfully uploaded to the database
+    @Override
+    public void updatedUser(String response) {
+        Toast.makeText(this, "Your account has been updated!", Toast.LENGTH_LONG).show();
+
+        userProfile.setUsername(inputusername);
+        userProfile.setPassword(inputpassword);
+        userProfile.setName(inputname);
+        userProfile.setCity(inputcity);
+        userProfile.setAge(Integer.valueOf(inputage));
+        userProfile.setCar(inputcar);
+        userProfile.setBio(inputbio);
+
+        // Directs user to the next activity using Intent
+        Intent intent = new Intent(MyProfileActivity.this, MapsActivity.class);
+        intent.putExtra("userObject", userProfile);
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +65,40 @@ public class MyProfileActivity extends AppCompatActivity {
         //asign edittexts
         MyprofileUsername = findViewById(R.id.MyProfileUsername);
         MyprofilePassword = findViewById(R.id.MyProfilePassword);
+        MyprofileName = findViewById(R.id.MyProfileNaam);
+        MyprofileCity = findViewById(R.id.MyProfileWoonplaats);
+        MyprofileAge = findViewById(R.id.MyProfileLeeftijd);
+        MyprofileCar = findViewById(R.id.MyProfileCar);
+        MyprofileBio = findViewById(R.id.MyProfileBio);
         //set edittexts
         MyprofileUsername.setText(userProfile.getUsername());
         MyprofilePassword.setText(userProfile.getPassword());
-
-        //create listener for login button
-        Button btn = findViewById(R.id.MyProfileUpdateButton);
-        onClick onButtonClick = new onClick();
-        btn.setOnClickListener(onButtonClick);
+        MyprofileName.setText(userProfile.getName());
+        MyprofileCity.setText(userProfile.getCity());
+        MyprofileAge.setText(String.valueOf(userProfile.getAge()));
+        MyprofileCar.setText(userProfile.getCar());
+        MyprofileBio.setText(userProfile.getBio());
 
     }
 
-    //creation of onclick for button
-    private class onClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MyProfileActivity.this, MapsActivity.class);
-            intent.putExtra("userObject", userProfile);
-            startActivity(intent);
-        }
+    public void update(View v) {
+
+        inputname = String.valueOf(MyprofileName.getText());
+        inputage = String.valueOf(MyprofileAge.getText());
+        inputcity = String.valueOf(MyprofileCity.getText());
+        inputcar = String.valueOf(MyprofileCar.getText());
+        inputbio = String.valueOf(MyprofileBio.getText());
+        inputusername = String.valueOf(MyprofileUsername.getText());
+        inputpassword = String.valueOf(MyprofilePassword.getText());
+        id = String.valueOf(userProfile.getUserId());
+        url = "https://ide50-dutchfarao.legacy.cs50.io:8080/list/" + id;
+
+        UserUpdater update = new UserUpdater(this, url, id, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
+        update.updateUser(this);
+
+
+
+
     }
 
 }

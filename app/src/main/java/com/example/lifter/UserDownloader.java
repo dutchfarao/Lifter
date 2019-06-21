@@ -46,16 +46,29 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
             for (int i = 0; i < data.length(); i++) {
                 JSONObject selectedUser= (JSONObject) data.get(i);
 
+
+
                 // Data
                 String userid = selectedUser.getString("id");
                 String username = selectedUser.getString("username");
                 String password = selectedUser.getString("password");
+                String name = selectedUser.getString("name");
+                String city = selectedUser.getString("city");
+                String age = selectedUser.getString("age");
+                String car= selectedUser.getString("car");
+                String bio = selectedUser.getString("bio");
+
 
                 //create userobject
                 User user = new User();
                 user.setUserId(Integer.valueOf(userid));
                 user.setUsername(username);
                 user.setPassword(password);
+                user.setName(name);
+                user.setCity(city);
+                user.setAge(Integer.valueOf(age));
+                user.setCar(car);
+                user.setBio(bio);
 
                 users.add(user);
             }

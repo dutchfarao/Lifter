@@ -5,11 +5,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -43,6 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         onClick onButtonClick = new onClick();
         btn.setOnClickListener(onButtonClick);
 
+
     }
 
 
@@ -55,6 +59,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+
+
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -65,11 +75,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final ArrayList<Liftspot> liftspots;
         liftspots = csvFile.read();
         for(Liftspot liftspot : liftspots) {
+
             System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
             LatLng position = new LatLng(liftspot.getLat(), liftspot.getLon());
             Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(String.valueOf(liftspot.getId())));
             marker.setTag(position);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         }
 
         //set listener for marker
@@ -88,6 +98,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             }
         });
+
+        LatLng center = new LatLng(52.18, 5.70);
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(center).zoom(7).bearing(0).tilt(0).build();
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     //creation of onclick for floating action button

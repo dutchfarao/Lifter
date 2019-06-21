@@ -47,18 +47,21 @@
         app:layout_constraintStart_toStartOf="@+id/g_map_street"
         app:layout_constraintTop_toBottomOf="@+id/g_map_street" />
 
-    <TextView
+    <Button
         android:id="@+id/LiftDriversText"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="117dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="27dp"
         android:layout_marginBottom="21dp"
+        android:onClick="addDriver"
         android:text="Aangemelde Drivers"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tableRow"
         app:layout_constraintEnd_toEndOf="@+id/LiftRatingbar"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LiftRatingbar" />
 
@@ -75,11 +78,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LiftDriversText" />
 
-    <TextView
+    <Button
         android:id="@+id/LiftLiftersText"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="19dp"
+        android:onClick="addLifter"
         android:text="Aangemelde Lifters"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tableRow2"

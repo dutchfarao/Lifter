@@ -12,7 +12,6 @@ public class Liftspot implements Serializable {
 
     private String name;
     private int id;
-    private Bitmap image;
     private String rating;
     private String type;
     private float lat;
@@ -34,14 +33,6 @@ public class Liftspot implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Bitmap getImage() {
-        return image;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
     }
 
     public String getRating() {

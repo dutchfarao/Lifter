@@ -121,6 +121,22 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         g_map_street.onSaveInstanceState(mStreetViewBundle);
     }
 
+    public void addDriver(View v) {
+        Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
+        intent.putExtra("userObject", userObject);
+        intent.putExtra("lifspotObject", liftspotObject);
+        intent.putExtra("category", "driver");
+        startActivity(intent);
+    }
+
+    public void addLifter(View v) {
+        Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
+        intent.putExtra("userObject", userObject);
+        intent.putExtra("lifspotObject", liftspotObject);
+        intent.putExtra("category", "lifter");
+        startActivity(intent);
+    }
+
 
     //creation of onclick for button
     public class onClick implements View.OnClickListener {

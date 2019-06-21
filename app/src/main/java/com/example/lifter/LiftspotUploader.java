@@ -1,9 +1,7 @@
 package com.example.lifter;
 
-
 import android.content.Context;
-import java.util.HashMap;
-import java.util.Map;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,61 +9,60 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-
-public class UserUploader {
+public class LiftspotUploader {
     Context context;
-    String username;
-    String password;
     String name;
-    String city;
-    String age;
-    String car;
-    String bio;
+    String rating;
+    String type;
+    String lat;
+    String lon;
+    String drivers;
+    String lifters;
     RequestQueue queue;
 
-
-    // Constructor
-    UserUploader(Context context1, String username1, String password1, String name1, String city1, String age1, String car1, String bio1) {
-        this.context = context1;
-        username = username1;
-        password = password1;
-        name = name1;
-        city = city1;
-        age = age1;
-        car = car1;
-        bio = bio1;
+    public LiftspotUploader(Context context, String name, String rating, String type, String lat, String lon, String drivers, String lifters) {
+        this.context = context;
+        this.name = name;
+        this.rating = rating;
+        this.type = type;
+        this.lat = lat;
+        this.lon = lon;
+        this.drivers = drivers;
+        this.lifters = lifters;
     }
-
 
 
     // Callback
     public interface Callback { ;
-        void postedUserError(VolleyError error);
-        void postedUser(String response);
-}
+        void postedLiftspotError(VolleyError error);
+        void postedLiftspot(String response);
+    }
 
 
     // Sends your points to the server
-    public void sendUser(final Callback activity) {
+    public void sendLiftspot(final LiftspotUploader.Callback activity) {
         // Code based on https://www.kompulsa.com/how-to-send-a-post-request-in-android/
         // POST the values
 
-        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/kak";
+        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/liftspot";
 
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        activity.postedUser(response);
+                        activity.postedLiftspot(response);
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        activity.postedUserError(error);
+                        activity.postedLiftspotError(error);
                     }
                 }) {
 
@@ -74,13 +71,13 @@ public class UserUploader {
             protected Map<String, String> getParams() {
                 // Put data in request
                 Map<String, String> MyData = new HashMap<>();
-                MyData.put("username", username);
-                MyData.put("password", password);
                 MyData.put("name", name);
-                MyData.put("city", city);
-                MyData.put("age", age);
-                MyData.put("car", car);
-                MyData.put("bio", bio);
+                MyData.put("rating", rating);
+                MyData.put("type", type);
+                MyData.put("lat", lat);
+                MyData.put("lon", lon);
+                MyData.put("drivers", "");
+                MyData.put("lifters", "");
                 return MyData;
             }
         };

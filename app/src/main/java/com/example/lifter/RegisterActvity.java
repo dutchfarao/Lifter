@@ -21,8 +21,7 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
     EditText car;
     EditText bio;
     String inputname;
-    String inputagestring;
-    int inputage;
+    String inputage;
     String inputcity;
     String inputcar;
     String inputbio;
@@ -39,7 +38,7 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
     // Shows the user a toast if the score is successfully uploaded to the database
     @Override
     public void postedUser(String response) {
-        Toast.makeText(this, "Account had been created!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Account has been created!", Toast.LENGTH_LONG).show();
 
         // Directs user to the next activity using Intent
         Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
@@ -75,16 +74,15 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
 
     public void submit(View v) {
 
-//        inputname = String.valueOf(name.getText());
-//            inputagestring = String.valueOf(age.getText());
-//            inputage = Integer.valueOf(inputagestring);
-//            inputcity = String.valueOf(city.getText());
-//            inputcar = String.valueOf(car.getText());
-//            inputbio = String.valueOf(bio.getText());
+         inputname = String.valueOf(name.getText());
+         inputage = String.valueOf(age.getText());
+         inputcity = String.valueOf(city.getText());
+         inputcar = String.valueOf(car.getText());
+         inputbio = String.valueOf(bio.getText());
          inputusername = String.valueOf(username.getText());
          inputpassword = String.valueOf(password.getText());
 
-        UserUploader register = new UserUploader(this, inputusername, inputpassword);
+        UserUploader register = new UserUploader(this, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
         register.sendUser(this);
 
 
