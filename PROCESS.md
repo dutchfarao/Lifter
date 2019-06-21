@@ -100,4 +100,6 @@ public class DriverLifterActivity extends AppCompatActivity implements LiftspotU
 ```
 De liftspots staan dus nu in de database, en bovenstaande code is weer verwijderd uit DriverLifterActivity. In deze activity ga ik nu de liftspots aanpassen dmv LiftspotUpdater. Met aanpassen bedoel ik specifiek het toevoegen en verwijderen van drivers/lifters voor een bepaalde liftspot. De liftspot bevatten allemaal een drivers en lifters string, deze string bestaat uit userId's van gebruikers die zich voor die locatie hebben aangemeld als driver. D.m.v een PUT request worden deze strings aangepast als een driver/lifter zich af- of aanmeld.
 
+Het is nu het einde van de dag en helaas lukt het nog niet om een driver/lifter toe te voegen. Ik heb volgensmij te maken met een null pointer maar kan hem niet vinden. Morgen ga ik verder.
+
 
