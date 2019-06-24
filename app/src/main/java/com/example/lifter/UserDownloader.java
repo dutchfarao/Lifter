@@ -60,15 +60,16 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
 
 
                 //create userobject
-                User user = new User();
-                user.setUserId(Integer.valueOf(userid));
-                user.setUsername(username);
-                user.setPassword(password);
-                user.setName(name);
-                user.setCity(city);
-                user.setAge(Integer.valueOf(age));
-                user.setCar(car);
-                user.setBio(bio);
+                User user = new User(
+                Integer.valueOf(userid),
+                username,
+                password,
+                name,
+                city,
+                Integer.valueOf(age),
+                car,
+                bio
+                );
 
                 users.add(user);
             }
@@ -91,7 +92,7 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
     public void getUsers(Callback activity) {
         this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("https://ide50-dutchfarao.legacy.cs50.io:8080/list", this, this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("https://ide50-dutchfarao.legacy.cs50.io:8080/kak", this, this);
         queue.add(jsonArrayRequest);
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -27,6 +29,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     User userProfile;
+    ArrayList<Liftspot> liftspots;
+    String markerId;
+    private static final String TAG = "MApsactivity";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Intent intent = getIntent();
         userProfile = (User)intent.getSerializableExtra("userObject");
+        liftspots = (ArrayList<Liftspot>) intent.getSerializableExtra("liftspots");
+        Log.d(TAG, "retreived liftspots maps:" + liftspots.get(0).getName());
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -63,17 +74,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //read the liftspots from csv file using csv helper
-        InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
-        CSVHelper csvFile = new CSVHelper(inputStream);
-        final ArrayList<Liftspot> liftspots;
-        liftspots = csvFile.read();
         for(Liftspot liftspot : liftspots) {
 
             System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
@@ -89,7 +93,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, LiftActivity.class);
                 Bundle args = new Bundle();
                 args.putSerializable("liftspots", liftspots);
-                args.putString("markerId", marker.getTitle());
+                markerId = marker.getTitle();
+                args.putString("markerId", markerId);
                 args.putSerializable("userObject", userProfile);
                 intent.putExtra("BUNDLE",args);
                 startActivity(intent);

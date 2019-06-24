@@ -20,19 +20,21 @@ public class LiftspotUploader {
     String type;
     String lat;
     String lon;
+    ArrayList<User> driversArray;
+    ArrayList<User> liftersArray;
     String drivers;
     String lifters;
     RequestQueue queue;
 
-    public LiftspotUploader(Context context, String name, String rating, String type, String lat, String lon, String drivers, String lifters) {
+    public LiftspotUploader(Context context, String name, String rating, String type, String lat, String lon, ArrayList<User> drivers, ArrayList<User> lifters) {
         this.context = context;
         this.name = name;
         this.rating = rating;
         this.type = type;
         this.lat = lat;
         this.lon = lon;
-        this.drivers = drivers;
-        this.lifters = lifters;
+        this.driversArray = drivers;
+        this.liftersArray = lifters;
     }
 
 
@@ -44,11 +46,11 @@ public class LiftspotUploader {
 
 
     // Sends your points to the server
-    public void sendLiftspot(final LiftspotUploader.Callback activity) {
+    public void sendLiftspot(final LiftspotUploader.Callback activity, int id) {
         // Code based on https://www.kompulsa.com/how-to-send-a-post-request-in-android/
         // POST the values
 
-        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/liftspot";
+        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/liftspot" + id;
 
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url,
 
@@ -76,8 +78,8 @@ public class LiftspotUploader {
                 MyData.put("type", type);
                 MyData.put("lat", lat);
                 MyData.put("lon", lon);
-                MyData.put("drivers", "");
-                MyData.put("lifters", "");
+                MyData.put("drivers", driversArray.toString());
+                MyData.put("lifters", liftersArray.toString());
                 return MyData;
             }
         };

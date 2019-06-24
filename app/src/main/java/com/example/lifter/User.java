@@ -16,6 +16,17 @@ public class User implements Serializable {
     String car;
     String bio;
 
+    public User(int userId, String username, String password, String name, String city, int age, String car, String bio) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.city = city;
+        this.age = age;
+        this.car = car;
+        this.bio = bio;
+    }
+
     public int getUserId() {
         return userId;
     }

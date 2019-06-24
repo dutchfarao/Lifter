@@ -3,6 +3,7 @@ package com.example.lifter;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -24,12 +25,16 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     TextView LiftTitle;
     RatingBar LiftRating;
     StreetViewPanorama streetView;
+    String liftspotstring;
     User userObject;
     Liftspot liftspotObject;
+    int liftspotId;
     private static final String STREETVIEW_BUNDLE = "StreetViewBundle";
     StreetViewPanoramaFragment g_map_street;
     float lat;
     float lon;
+    private static final String TAG = "LiftActivity";
+
 
 
     @Override
@@ -46,9 +51,12 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
         //get intent
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
-        ArrayList<Liftspot> liftspots = (ArrayList<Liftspot>) args.getSerializable("liftspots");
-        String liftspotstring = args.getString("markerId");
-        int liftspotId = Integer.valueOf(liftspotstring);
+        ArrayList<Liftspot> liftspots = (ArrayList<Liftspot>)args.getSerializable("liftspots");
+        Log.d(TAG, "liftspotsarray" + liftspots);
+        liftspotstring = args.getString("markerId");
+        liftspotId = Integer.valueOf(liftspotstring);
+        Log.d(TAG, "liftspotId" + liftspotId);
+
         userObject = (User)args.getSerializable("userObject");
         liftspotObject = liftspots.get(liftspotId);
 
