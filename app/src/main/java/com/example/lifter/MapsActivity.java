@@ -25,13 +25,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LiftspotDownloader.Callback {
 
     private GoogleMap mMap;
     User userProfile;
-    ArrayList<Liftspot> liftspots;
     String markerId;
-    private static final String TAG = "MApsactivity";
+    Liftspot liftspot;
+    ArrayList<Liftspot> retrievedLiftspots;
+    int counter;
+    private static final String TAG = "Mapsactivity";
 
 
 
@@ -41,8 +43,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Intent intent = getIntent();
         userProfile = (User)intent.getSerializableExtra("userObject");
-        liftspots = (ArrayList<Liftspot>) intent.getSerializableExtra("liftspots");
-        Log.d(TAG, "retreived liftspots maps:" + liftspots.get(0).getName());
+        //liftspots = (ArrayList<Liftspot>) intent.getSerializableExtra("liftspots");
+
+        // get liftspots
+        retrievedLiftspots = new ArrayList<>();
+
+
+        InputStream inputStream = getResources().openRawResource(R.raw.liftplekken);
+        CSVHelper csvFile = new CSVHelper(inputStream);
+        final ArrayList<Liftspot> liftspots;
+        liftspots = csvFile.read();
+        int counter = 0;
+        for (counter = 0; counter < liftspots.size(); counter ++) {
+            LiftspotDownloader download = new LiftspotDownloader(this);
+            download.getLiftspots(this, counter);
+
+        }
+        //Log.d(TAG, "retreived liftspots maps:" + retrievedLiftspots.get(0).getName());
+
 
 
 
@@ -71,20 +89,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
 
+    //creation of onclick for floating action button
+    private class onClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
+            intent.putExtra("userObject", userProfile);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void gotLiftspots(Liftspot liftspot1) {
+        liftspot = liftspot1;
+        Log.d(TAG, "this is the liftspot object: " + liftspot);
+
+        retrievedLiftspots.add(liftspot);
+        Log.d(TAG, "this is the retrievedLiftspots arraylist: " + retrievedLiftspots);
+
+        System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon() + liftspot.getId());
+        LatLng position = new LatLng(liftspot.getLat(), liftspot.getLon());
+        Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(String.valueOf(liftspot.getName())));
+        marker.setTag(position);
+
+
+    }
+
+    @Override
+    public void gotLiftspotsError(String message) {
+
+        // Informs the user if an error occurred while logging in
+        Toast.makeText(this , "Something went wrong, couldn't load liftspots", Toast.LENGTH_LONG).show();
+
+    }
+
 
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "dit is retrievedLiftspots in the onMapReady" + retrievedLiftspots);
         mMap = googleMap;
 
-        for(Liftspot liftspot : liftspots) {
-
-            System.out.println(liftspot.getName() + liftspot.getLat() + liftspot.getLon());
-            LatLng position = new LatLng(liftspot.getLat(), liftspot.getLon());
-            Marker marker = mMap.addMarker(new MarkerOptions().position(position).title(String.valueOf(liftspot.getId())));
-            marker.setTag(position);
-        }
 
         //set listener for marker
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -92,7 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, LiftActivity.class);
                 Bundle args = new Bundle();
-                args.putSerializable("liftspots", liftspots);
+                args.putSerializable("liftspots", retrievedLiftspots);
                 markerId = marker.getTitle();
                 args.putString("markerId", markerId);
                 args.putSerializable("userObject", userProfile);
@@ -110,15 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    //creation of onclick for floating action button
-    private class onClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
-            intent.putExtra("userObject", userProfile);
-            startActivity(intent);
-        }
-    }
 
 
 }

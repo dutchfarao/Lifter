@@ -45,8 +45,8 @@ public class LiftspotDownloader implements Response.ErrorListener, Response.List
     public void onResponse(JSONArray data) {
 
         // Declares a new ArrayList which holds the scores
-        ArrayList<User> driversArray = new ArrayList<>();
-        ArrayList<User> liftersArray = new ArrayList<>();
+        driversArray = new ArrayList<>();
+        liftersArray = new ArrayList<>();
         JSONLiftspots = new JSONArray();
 
         liftspot = new Liftspot();
@@ -78,60 +78,59 @@ public class LiftspotDownloader implements Response.ErrorListener, Response.List
                 liftspot.setType(type);
                 Log.d(TAG, "this is the liftspot that is sent:" + liftspot);
                 JSONArray JSONdrivers = new JSONArray(driversstring);
+                Log.d(TAG, "this is the lenght of driversarray " + JSONdrivers.length());
 
-                if (JSONdrivers.length() != 0){
-                    for (int j=0; j <JSONdrivers.length(); j++) {
-                        JSONObject JSONDriver = JSONdrivers.getJSONObject(j);
+                for (int j=0; j <JSONdrivers.length(); j++) {
+                    JSONObject JSONDriver = JSONdrivers.getJSONObject(j);
 
-                        User driver = new User(
-                                Integer.valueOf(JSONDriver.getString("id")),
-                                JSONDriver.getString("username"),
-                                JSONDriver.getString("password"),
-                                JSONDriver.getString("name"),
-                                JSONDriver.getString("city"),
-                                Integer.valueOf(JSONDriver.getString("age")),
-                                JSONDriver.getString("car"),
-                                JSONDriver.getString("bio")
-                        );
+                    User driver = new User(
+                            Integer.valueOf(JSONDriver.getString("userId")),
+                            JSONDriver.getString("username"),
+                            JSONDriver.getString("password"),
+                            JSONDriver.getString("name"),
+                            JSONDriver.getString("city"),
+                            Integer.valueOf(JSONDriver.getString("age")),
+                            JSONDriver.getString("car"),
+                            JSONDriver.getString("bio")
+                    );
 
 
-                        driversArray.add(driver);
-                        Log.d(TAG, "this is the driversArray :" + driversArray);
+                    driversArray.add(driver);
+                    Log.d(TAG, "this is the driversArray :" + driversArray + "liftspotid" + liftspotid);
 
-                    }
                 }
 
 
 
 
-                String liftersstring = selectedLiftspot.getString("lifter");
+
+                String liftersstring = selectedLiftspot.getString("lifters");
                 Log.d(TAG, liftersstring);
                 JSONArray JSONlifters = new JSONArray(liftersstring);
 
-                if (JSONlifters.length() != 0){
-                    for (int k=0; k <JSONlifters.length(); k++) {
-                        JSONObject JSONLifter = JSONlifters.getJSONObject(k);
 
-                        User lifter = new User(
-                                Integer.valueOf(JSONLifter.getString("id")),
-                                JSONLifter.getString("username"),
-                                JSONLifter.getString("password"),
-                                JSONLifter.getString("name"),
-                                JSONLifter.getString("city"),
-                                Integer.valueOf(JSONLifter.getString("age")),
-                                JSONLifter.getString("car"),
-                                JSONLifter.getString("bio")
-                        );
+                for (int k=0; k <JSONlifters.length(); k++) {
+                    JSONObject JSONLifter = JSONlifters.getJSONObject(k);
+                    Log.d(TAG, "this is the liftersarray :" + "hoi");
+
+                    User lifter = new User(
+                            Integer.valueOf(JSONLifter.getString("userId")),
+                            JSONLifter.getString("username"),
+                            JSONLifter.getString("password"),
+                            JSONLifter.getString("name"),
+                            JSONLifter.getString("city"),
+                            Integer.valueOf(JSONLifter.getString("age")),
+                            JSONLifter.getString("car"),
+                            JSONLifter.getString("bio")
+                    );
 
 
-                        liftersArray.add(lifter);
-                        Log.d(TAG, "this is the liftersarray :" + liftersArray);
+                    liftersArray.add(lifter);
+                    Log.d(TAG, "this is the liftersarray :" + liftersArray);
 
-                    }
                 }
-                if (JSONlifters.length() !=0){
-                    liftersArray = new ArrayList<User>();
-                }
+
+
 
 
 
@@ -145,7 +144,8 @@ public class LiftspotDownloader implements Response.ErrorListener, Response.List
         }
         // Runs in case of an exception
         catch (JSONException e) {
-            //Toast.makeText(context, "JSONException: " + e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "JSONException: " + e.toString(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
         activity.gotLiftspots(liftspot);
 
@@ -158,10 +158,11 @@ public class LiftspotDownloader implements Response.ErrorListener, Response.List
     }
 
     // Implements the actual JSONRequest
-    public void getLiftspots(Callback activity, int id) {
+    public void getLiftspots(Callback activity, int id1) {
         this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/liftspot" + id;
+        String url = "https://ide50-dutchfarao.legacy.cs50.io:8080/liftspot" + id1;
+        id = id1;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url , this, this);
         queue.add(jsonArrayRequest);
     }
