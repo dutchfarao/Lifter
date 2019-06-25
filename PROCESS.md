@@ -106,6 +106,10 @@ Het is nu het einde van de dag en helaas lukt het nog niet om een driver/lifter 
 
 Het hele weekend en vandaag ben ik bezig geweest met het oplossen van een structureel probleem, de liftspots waren niet aan te passen dmw van een PUT request, waarom dit zo was, was mij een raadsel. Aan het einde van de dag merkte ik echter op dat de markers steeds een andere liftspot lieten zien na het opnieuw installeren van de app. Wat bleek was dat de id's van de liftplekken helemaal niet overeen kwamen met de gegeven id's. Hierdoor werd elk PUT reuqest afgewezen. Ik heb dit nu opgelost, morgen hoop ik dan eindelijk mijn app af te ronden.
 
+# Dinsdag 26 juni 
+
+Vandaag is het moment dan eindelijk daar. De app is af. Morgen ga ik beginnen aan mijn REPORT.md, en de app optimaliseren.
+
 
 
 
