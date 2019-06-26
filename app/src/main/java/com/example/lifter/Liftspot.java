@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 public class Liftspot implements Serializable {
 
+    /**
+
+    Representation of a Liftspot object in Lifter
+
+    */
+
     private String name;
     private int id;
     private String rating;

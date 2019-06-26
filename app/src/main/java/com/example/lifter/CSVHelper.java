@@ -5,14 +5,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CSVHelper {
     InputStream inputStream;
 
+
+    /**
+  T
+     */
+
+
     public CSVHelper(InputStream inputStream){
         this.inputStream = inputStream;
     }
+
+    /**
+     Reads liftspots from a csv file
+
+     Input:
+     A inputstream, liftspots.csv
+     */
 
     public ArrayList<Liftspot> read(){
         ArrayList<Liftspot> liftspots = new ArrayList<>();

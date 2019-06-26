@@ -1,11 +1,13 @@
 package com.example.lifter;
-
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class User implements Serializable {
+
+    /**
+
+     Representation of a User object in Lifter
+
+     */
 
     int userId;
     String username;
@@ -29,10 +31,6 @@ public class User implements Serializable {
 
     public int getUserId() {
         return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

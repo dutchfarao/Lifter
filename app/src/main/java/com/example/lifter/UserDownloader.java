@@ -1,4 +1,5 @@
 package com.example.lifter;
+
 import android.content.Context;
 import android.widget.Toast;
 import com.android.volley.RequestQueue;
@@ -6,22 +7,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class UserDownloader implements Response.ErrorListener, Response.Listener<JSONArray> {
+
+    /**
+
+     This class downloads all users from a database, it then creates userobjects with that data.
+
+     */
 
     Context context;
     JSONArray JSONUsers;
     ArrayList<User> users;
     Callback activity;
 
-    // constructer
+    // constructor
     public UserDownloader(Context context) {
         this.context = context;
     }
@@ -36,17 +40,14 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
     // Implementing the OnResponse
     @Override
     public void onResponse(JSONArray data) {
-
-        // Declares a new ArrayList which holds the scores
+        // Declares a new ArrayList which holds users
         users = new ArrayList<>();
         JSONUsers = new JSONArray();
 
-        // Loop to parse all the score data from the downloaded JSONObject
+        // Loop to get all the user data
         try {
             for (int i = 0; i < data.length(); i++) {
                 JSONObject selectedUser= (JSONObject) data.get(i);
-
-
 
                 // Data
                 String userid = selectedUser.getString("id");
@@ -57,7 +58,6 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
                 String age = selectedUser.getString("age");
                 String car= selectedUser.getString("car");
                 String bio = selectedUser.getString("bio");
-
 
                 //create userobject
                 User user = new User(
@@ -70,11 +70,10 @@ public class UserDownloader implements Response.ErrorListener, Response.Listener
                 car,
                 bio
                 );
-
+                //add user object to ArrayList of users
                 users.add(user);
             }
         }
-
         // Runs in case of an exception
         catch (JSONException e) {
             Toast.makeText(context, "JSONException: " + e.toString(), Toast.LENGTH_SHORT).show();

@@ -1,12 +1,6 @@
 package com.example.lifter;
 
-
-
 import android.content.Context;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.android.volley.Request;
@@ -16,9 +10,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
-
 public class UserUpdater {
+
+    /**
+
+     This class updates a specific User object in a database, it is called in the MyProfileActivity when a User makes changes to their profile.
+
+     */
+
     Context context;
     String username;
     String password;
@@ -30,7 +29,6 @@ public class UserUpdater {
     String bio;
     RequestQueue queue;
     String url;
-
 
     // Constructor
     UserUpdater(Context context1, String url1, String id1, String username1, String password1, String name1, String city1, String age1, String car1, String bio1) {
@@ -55,9 +53,7 @@ public class UserUpdater {
 
     // Sends your points to the server
     public void updateUser(final Callback activity) {
-        // Code based on https://www.kompulsa.com/how-to-send-a-post-request-in-android/
-        // POST the values
-
+        //create request
         StringRequest MyStringRequest = new StringRequest(Request.Method.PUT, url,
 
                 new Response.Listener<String>() {
@@ -91,7 +87,5 @@ public class UserUpdater {
         };
         queue = Volley.newRequestQueue(context);
         queue.add(MyStringRequest);
-
     }
-
 }

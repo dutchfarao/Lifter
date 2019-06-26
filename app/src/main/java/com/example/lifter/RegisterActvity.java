@@ -1,17 +1,21 @@
 package com.example.lifter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 
 public class RegisterActvity extends AppCompatActivity implements UserUploader.Callback {
+
+
+    /**
+
+     This activity handles the registration of a user, and calls UserUploader to submit the user to database.
+
+     */
 
     EditText name;
     EditText username;
@@ -40,22 +44,17 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
     public void postedUser(String response) {
         Toast.makeText(this, "Account has been created!", Toast.LENGTH_LONG).show();
 
-        // Directs user to the next activity using Intent
+        // Directs user to the next activity using intent
         Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
         startActivity(intent);
+        //finish activity
+        finish();
     }
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-
-
         city = findViewById(R.id.RegisterWoonplaats);
         car = findViewById(R.id.RegisterCar);
         bio = findViewById(R.id.RegisterBio);
@@ -63,17 +62,10 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
         age = findViewById(R.id.RegisterLeeftijd);
         username = findViewById(R.id.RegisterUsername);
         password = findViewById(R.id.RegisterPassword);
-
-
-
-
-
     }
 
-
-
     public void submit(View v) {
-
+        //get all values from edittexts
          inputname = String.valueOf(name.getText());
          inputage = String.valueOf(age.getText());
          inputcity = String.valueOf(city.getText());
@@ -82,12 +74,8 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
          inputusername = String.valueOf(username.getText());
          inputpassword = String.valueOf(password.getText());
 
+         //call userloader, thus submitting user to database
         UserUploader register = new UserUploader(this, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
         register.sendUser(this);
-
-
-
-
     }
-
 }

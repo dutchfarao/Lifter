@@ -3,78 +3,55 @@ package com.example.lifter;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
-import com.google.android.gms.maps.StreetViewPanoramaOptions;
-import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
-
 import java.util.ArrayList;
 
 public class LiftActivity extends AppCompatActivity implements OnStreetViewPanoramaReadyCallback {
 
+    /**
 
+     This activity shows user a selected liftspot, including drivers and lifters that have submitted themselves to that liftspot.
 
+     */
 
     TextView LiftTitle;
     RatingBar LiftRating;
-    StreetViewPanorama streetView;
     String markerId;
     User userObject;
-    Liftspot liftspotObject;
+    public static Liftspot liftspotObject;
     Liftspot tempLiftspot;
     String tempLiftspotname;
     GridView driversLayout;
     GridView liftersLayout;
     ArrayList<User> driversArray;
     ArrayList<User> liftersArray;
-    int liftspotId;
     private static final String STREETVIEW_BUNDLE = "StreetViewBundle";
     StreetViewPanoramaFragment g_map_street;
     ArrayList<Liftspot> liftspots;
     float lat;
     float lon;
-    private static final String TAG = "LiftActivity";
-
-    private class GridItemClickListener implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            User clickedUser = (User) parent.getItemAtPosition(position);
-            Intent intent = new Intent(LiftActivity.this, ProfileActivity.class);
-            intent.putExtra("clickedUser", clickedUser);
-            intent.putExtra("liftspots", liftspots);
-            intent.putExtra("liftspotObject", liftspotObject);
-            intent.putExtra("markerId", markerId);
-            startActivity(intent);
-        }
-    }
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lift);
-
+        //set driver and lifter gridlayout
         driversLayout = findViewById(R.id.DriverLinearLayout);
         liftersLayout = findViewById(R.id.LifterLinearLayout);
 
-        //setting listeners for the drivers and lifters
-        //initialising GridItemListener and calling it
+        //initialising GridItemListener and setting it to layouts
         GridItemClickListener profileClick = new GridItemClickListener();
         driversLayout.setOnItemClickListener(profileClick);
         liftersLayout.setOnItemClickListener(profileClick);
@@ -85,37 +62,31 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
                         .findFragmentById(R.id.g_map_street);
         g_map_street.getStreetViewPanoramaAsync(this);
 
-        //get intent
+        //get intent from MapActivity
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         liftspots = (ArrayList<Liftspot>)args.getSerializable("liftspots");
-        Log.d(TAG, "liftspotsarray" + liftspots);
+        userObject = (User)args.getSerializable("userObject");
         markerId = args.getString("markerId");
-        Log.d(TAG, "liftspotId" + markerId);
+        //determine which liftspot is selected by comparing markerId to id's of liftspots during iteration
         for (int i = 0; i < liftspots.size(); i++){
             tempLiftspot = liftspots.get(i);
             tempLiftspotname = tempLiftspot.getName();
             if (markerId.equals(tempLiftspotname)){
+                //setting correct liftspotobject
                 liftspotObject = tempLiftspot;
             }
         }
+        //setting driversarray and liftersarray used for GridLayouts
         driversArray = liftspotObject.getDrivers();
-        Log.d(TAG, "dit is de driversarray" + driversArray);
         liftersArray = liftspotObject.getLifters();
 
-
-        userObject = (User)args.getSerializable("userObject");
-        Log.d(TAG, "liftspotobject" + liftspotObject);
-        Log.d(TAG, "liftspotId" + liftspotObject.getId());
-
-
-
-        //set textviews and rating
-        LiftTitle = findViewById(R.id.LiftTitel);
-        LiftRating = findViewById(R.id.LiftRatingbar);
         //set title
-        LiftTitle.setText(liftspotObject.getName());
-        //set ratingbar
+        LiftTitle = findViewById(R.id.LiftTitel);
+        LiftTitle.setText((Html.fromHtml(liftspotObject.getName())));
+        //set rating
+        LiftRating = findViewById(R.id.LiftRatingbar);
+        //a rating is always a string (bad, average, good or great), set star rating according to that string.
         switch (liftspotObject.getRating()) {
             case "Bad":
                 LiftRating.setRating(Float.parseFloat("2.0"));
@@ -131,7 +102,6 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
                 break;
         }
 
-
         //create listener for login button
         Button btn = findViewById(R.id.LiftHomeButton);
         onClick onButtonClick = new onClick();
@@ -139,7 +109,6 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
 
         //implementing the adapter for the separate grid items
         ProfileAdapter adapter = new ProfileAdapter(this, R.layout.grid_item, driversArray);
-        Log.d(TAG, "driversArray" + driversArray);
         driversLayout.setAdapter(adapter);
 
         //implementing the adapter for the separate grid items
@@ -149,17 +118,25 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
 
     @Override
     public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
+        //set latitude and longitude for correct streetview
         lat = liftspotObject.getLat();
         lon = liftspotObject.getLon();
         streetViewPanorama.setPosition(new LatLng(lat,lon));
-
-        //streetView = streetViewPanorama;
     }
 
     @Override
     protected void onResume() {
         g_map_street.onResume();
+        driversArray = liftspotObject.getDrivers();
+        liftersArray = liftspotObject.getLifters();
 
+        //implementing the adapter for the separate grid items
+        ProfileAdapter adapter = new ProfileAdapter(this, R.layout.grid_item, driversArray);
+        driversLayout.setAdapter(adapter);
+
+        //implementing the adapter for the separate grid items
+        ProfileAdapter adapter2 = new ProfileAdapter(this, R.layout.grid_item, liftersArray);
+        liftersLayout.setAdapter(adapter2);
 
         super.onResume();
     }
@@ -172,7 +149,6 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
 
     @Override
     protected void onDestroy() {
-        g_map_street.onDestroy();
         super.onDestroy();
     }
 
@@ -190,32 +166,50 @@ public class LiftActivity extends AppCompatActivity implements OnStreetViewPanor
     }
 
     public void addDriver(View v) {
+        /**
+        Gives intent to DriverLifterActivity, determines that a user wants to change it's driverstatus
+         */
         Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
         intent.putExtra("userObject", userObject);
         intent.putExtra("liftspotObject", liftspotObject);
-        intent.putExtra("liftspots", liftspots);
-        intent.putExtra("markerId", markerId);
+        //set category to driver
         intent.putExtra("category", "driver");
         startActivity(intent);
     }
 
     public void addLifter(View v) {
+        /**
+         Gives intent to DriverLifterActivity, determines that a user wants to change it's lifterstatus
+         */
         Intent intent = new Intent(LiftActivity.this, DriverLifterActivity.class);
         intent.putExtra("userObject", userObject);
         intent.putExtra("liftspotObject", liftspotObject);
-        intent.putExtra("liftspots", liftspots);
-        intent.putExtra("markerId", markerId);
+        //set category to lifter
         intent.putExtra("category", "lifter");
         startActivity(intent);
     }
 
 
-    //creation of onclick for button
     public class onClick implements View.OnClickListener {
+        /**
+         This OnClick handles a click from a user and ends the activity, thus directing user to MapActivity
+         */
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(LiftActivity.this, MapsActivity.class);
-            intent.putExtra("userObject", userObject);
+            finish();
+        }
+    }
+
+    private class GridItemClickListener implements AdapterView.OnItemClickListener {
+        /**
+         This GridItemClickListener handles a click from a user on another submitted user, and leads them to the profile page of the clicked user.
+         */
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            User clickedUser = (User) parent.getItemAtPosition(position);
+            Intent intent = new Intent(LiftActivity.this, ProfileActivity.class);
+            intent.putExtra("clickedUser", clickedUser);
             startActivity(intent);
         }
     }

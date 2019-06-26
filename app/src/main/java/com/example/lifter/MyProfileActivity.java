@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 
 public class MyProfileActivity extends AppCompatActivity implements UserUpdater.Callback{
+
+    /**
+
+     This activity shows the user it's own profile, it is also used to edit and update the user object.
+
+     */
     User userProfile;
     EditText MyprofileUsername;
     EditText MyprofilePassword;
@@ -40,6 +44,7 @@ public class MyProfileActivity extends AppCompatActivity implements UserUpdater.
     public void updatedUser(String response) {
         Toast.makeText(this, "Your account has been updated!", Toast.LENGTH_LONG).show();
 
+        //update user object
         userProfile.setUsername(inputusername);
         userProfile.setPassword(inputpassword);
         userProfile.setName(inputname);
@@ -48,10 +53,11 @@ public class MyProfileActivity extends AppCompatActivity implements UserUpdater.
         userProfile.setCar(inputcar);
         userProfile.setBio(inputbio);
 
-        // Directs user to the next activity using Intent
-        Intent intent = new Intent(MyProfileActivity.this, MapsActivity.class);
-        intent.putExtra("userObject", userProfile);
-        startActivity(intent);
+        //update static object
+        MapsActivity.userProfile = userProfile;
+
+        // finish activity when account had been updated
+        finish();
     }
 
 
@@ -82,7 +88,6 @@ public class MyProfileActivity extends AppCompatActivity implements UserUpdater.
     }
 
     public void update(View v) {
-
         inputname = String.valueOf(MyprofileName.getText());
         inputage = String.valueOf(MyprofileAge.getText());
         inputcity = String.valueOf(MyprofileCity.getText());
@@ -91,14 +96,10 @@ public class MyProfileActivity extends AppCompatActivity implements UserUpdater.
         inputusername = String.valueOf(MyprofileUsername.getText());
         inputpassword = String.valueOf(MyprofilePassword.getText());
         id = String.valueOf(userProfile.getUserId());
-        url = "https://ide50-dutchfarao.legacy.cs50.io:8080/list/" + id;
+        url = "https://ide50-dutchfarao.legacy.cs50.io:8080/kak/" + id;
 
+        //PUT request
         UserUpdater update = new UserUpdater(this, url, id, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
         update.updateUser(this);
-
-
-
-
     }
-
 }

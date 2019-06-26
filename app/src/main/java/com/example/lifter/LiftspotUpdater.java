@@ -8,15 +8,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LiftspotUpdater {
+    /**
+
+     This class updates a liftspotobject.
+
+     */
     Context context;
     String url;
     String name;
@@ -46,21 +46,16 @@ public class LiftspotUpdater {
         void updatedLiftspot(String response);
     }
 
-
-
-
-    // Sends your points to the server
+    // updates a liftspot
     public void updateLiftspot(final LiftspotUpdater.Callback activity) {
-        // Code based on https://www.kompulsa.com/how-to-send-a-post-request-in-android/
-        // POST the values
 
+        //create request
         StringRequest MyStringRequest = new StringRequest(Request.Method.PUT, url,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         activity.updatedLiftspot(response);
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -70,7 +65,7 @@ public class LiftspotUpdater {
                     }
                 }) {
 
-            // Put data in request
+            // Put data in hashmap and add to request
             @Override
             protected Map<String, String> getParams() {
                 // Put data in request
