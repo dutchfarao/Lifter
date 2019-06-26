@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         ProfileBio = findViewById(R.id.ProfileBio);
 
         //set edittexts
-        ProfileUsername.setText(userProfile.getUsername());
+        ProfileUsername.setText("Profiel van " + userProfile.getUsername());
         ProfileName.setText(userProfile.getName());
         ProfileCity.setText(userProfile.getCity());
         ProfileAge.setText(String.valueOf(userProfile.getAge()));
