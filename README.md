@@ -46,12 +46,12 @@ Lifter is een platform wat lifters en automobilisten verbind.
 
 https://youtu.be/kJXgGa9Tk9k 
 
-``  
+``` 
   ## Credits
 Made by Darian El Sayed for de Universiteit van Amsterdam.
 rester.py by Martijn Stegeman https://github.com/stgm/rester
 
-``
+```
   
 
 
