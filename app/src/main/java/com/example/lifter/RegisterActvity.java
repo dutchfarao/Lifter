@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.VolleyError;
 
-public class RegisterActvity extends AppCompatActivity implements UserUploader.Callback {
+import java.util.ArrayList;
+
+public class RegisterActvity extends AppCompatActivity implements UserUploader.Callback, UserDownloader.Callback{
 
 
     /**
@@ -31,6 +33,8 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
     String inputbio;
     String inputusername;
     String inputpassword;
+    User tempUser;
+    String tempUsername;
 
 
     // Shows the user a warning if an error is encountered during the uploading of the score
@@ -43,12 +47,9 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
     @Override
     public void postedUser(String response) {
         Toast.makeText(this, "Account has been created!", Toast.LENGTH_LONG).show();
-
-        // Directs user to the next activity using intent
-        Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
-        startActivity(intent);
-        //finish activity
-        finish();
+        //download users from database and check if user/password combination exists
+        UserDownloader login = new UserDownloader(this);
+        login.getUsers(this);
     }
 
     @Override
@@ -77,5 +78,37 @@ public class RegisterActvity extends AppCompatActivity implements UserUploader.C
          //call userloader, thus submitting user to database
         UserUploader register = new UserUploader(this, inputusername, inputpassword, inputname, inputcity, inputage, inputcar, inputbio);
         register.sendUser(this);
+
+    }
+
+    @Override
+    public void gotUser(ArrayList<User> users) {
+
+        /**
+
+         This method make sure that the user is downloaded after it has been registered
+
+         */
+
+        //iterate over ArrayList of all users
+        for (int i = 0; i < users.size(); i++){
+            tempUser = users.get(i);
+            tempUsername = tempUser.getUsername();
+            //check if usernames match
+            if (inputusername.equals(tempUsername)){
+                //start intent
+                Intent intent = new Intent(RegisterActvity.this, MapsActivity.class);
+                intent.putExtra("userObject", tempUser);
+                startActivity(intent);
+                //finish activity
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public void gotUserError(String message) {
+        // Informs the user if an error occurred while getting account in
+        Toast.makeText(this , "Error, check your connection!", Toast.LENGTH_LONG).show();
     }
 }
