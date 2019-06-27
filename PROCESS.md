@@ -110,6 +110,10 @@ Het hele weekend en vandaag ben ik bezig geweest met het oplossen van een struct
 
 Vandaag is het moment dan eindelijk daar. De app is af. Morgen ga ik beginnen aan mijn REPORT.md, en de app optimaliseren.
 
+# Woensdag 27 juni
+
+Deze dag heb ik besteed aan het opschonen van de code en het toevoegen van comments. Daarnaast heb ik de landscape mode layouts verbeterd en ervoor gezorgd dat de structuur van de app optimaal is. Hiervoor maakte ik constant gebruik van intents, van pagina naar pagina. Nu finish is ook daadwerkelijk activities, waardoor deze niet blijven opstapelen, de app werkt hierdoor veel sneller en soepeler.
+
 
 
 
